@@ -276,6 +276,10 @@ class MemoryManagementApp:
         self.root.title("内存管理模拟系统")
         self.root.geometry("1200x700")
         
+        # 先初始化管理器
+        self.partition_manager = DynamicPartition(1024)
+        self.paging_manager = DynamicPaging(64, 1, 64)
+        
         # 创建标签页
         self.tab_control = ttk.Notebook(self.root)
         
@@ -290,12 +294,6 @@ class MemoryManagementApp:
         self._setup_paging_tab()
         
         self.tab_control.pack(expand=1, fill="both")
-        
-        # 初始化动态分区管理器
-        self.partition_manager = DynamicPartition(1024)
-        
-        # 初始化动态分页管理器
-        self.paging_manager = DynamicPaging(64, 1, 64)
         
     def _setup_partition_tab(self):
         """设置动态分区管理标签页"""
